@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITS LEGEND</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+text-align:center;
+}
+
+.logo{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #3b82f6;
+margin-bottom:15px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.main-btn{
+width:100%;
+padding:15px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.section{
+display:none;
+margin-top:10px;
+}
+
+.search{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-bottom:10px;
+font-size:16px;
+}
+
+.card{
+background:#334155;
+padding:12px;
+margin-top:8px;
+border-radius:10px;
+}
+
+.card a{
+color:white;
+text-decoration:none;
+display:block;
+}
+
+.chat-box{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.chat-messages{
+height:250px;
+overflow-y:auto;
+background:#0f172a;
+padding:10px;
+border-radius:10px;
+margin-bottom:10px;
+text-align:left;
+}
+
+.user{
+margin-bottom:8px;
+color:white;
+}
+
+.bot{
+margin-bottom:8px;
+color:#60a5fa;
+}
+
+.chat-input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.send-btn{
+width:100%;
+padding:12px;
+background:#22c55e;
+border:none;
+border-radius:10px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.clear-btn{
+width:100%;
+padding:12px;
+margin-top:8px;
+background:#ef4444;
+border:none;
+border-radius:10px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://files.catbox.moe/gkmrfn.png" class="logo">
+
+<h1>ITS LEGEND</h1>
+
+<!-- SOCIAL MEDIA -->
+
+<button class="main-btn" onclick="toggleSection('social')">
+📱 Social Media
+</button>
+
+<div id="social" class="section">
+
+<input
+type="text"
+class="search"
+placeholder="Search Social Media..."
+onkeyup="searchSocial(this.value)"
+>
+
+<div id="social-list">
+
+<div class="card social-item">
+<a href="https://www.instagram.com/itslegendddd" target="_blank">
+📸 Instagram
+</a>
+</div>
+
+<div class="card social-item">
+<a href="https://discord.gg/VKhy3f8juK" target="_blank">
+💬 Discord
+</a>
+</div>
+
+<div class="card social-item">
+<a href="https://youtube.com/@itslegenddddd" target="_blank">
+▶️ YouTube
+</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- MINECRAFT -->
+
+<button class="main-btn" onclick="toggleSection('servers')">
+🎮 Minecraft Servers
+</button>
+
+<div id="servers" class="section">
+
+<input
+type="text"
+class="search"
+placeholder="Search Server..."
+onkeyup="searchServer(this.value)"
+>
+
+<div id="server-list">
+
+<div class="card server-item">
+
+<button class="main-btn"
+onclick="toggleSection('onlylegends')">
+OnlyLegendsMC
+</button>
+
+<div id="onlylegends" class="section">
+
+<div class="card">
+<b>Java IP</b><br>
+OnlyLegendsMC.aternos.me:63710
+</div>
+
+<div class="card">
+<b>Bedrock IP</b><br>
+OnlyLegendsMC.aternos.me
+</div>
+
+<div class="card">
+<b>Port</b><br>
+63710
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LEGEND ASSISTANT -->
+
+<button class="main-btn" onclick="toggleSection('assistant')">
+🤖 Legend Assistant
+</button>
+
+<div id="assistant" class="section">
+
+<div class="chat-box">
+
+<div id="chatMessages" class="chat-messages"></div>
+
+<input
+type="text"
+id="userInput"
+class="chat-input"
+placeholder="Type a message..."
+>
+
+<button class="send-btn" onclick="sendMessage()">
+Send
+</button>
+
+<button class="clear-btn" onclick="clearChat()">
+Clear Chat
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function toggleSection(id){
+let section=document.getElementById(id);
+
+if(section.style.display==="block"){
+section.style.display="none";
+}else{
+section.style.display="block";
+}
+}
+
+function searchSocial(value){
+
+value=value.toLowerCase();
+
+document.querySelectorAll(".social-item")
+.forEach(item=>{
+
+item.style.display=
+item.innerText.toLowerCase().includes(value)
+? "block" : "none";
+
+});
+
+}
+
+function searchServer(value){
+
+value=value.toLowerCase();
+
+document.querySelectorAll(".server-item")
+.forEach(item=>{
+
+item.style.display=
+item.innerText.toLowerCase().includes(value)
+? "block" : "none";
+
+});
+
+}
+
+function sendMessage(){
+
+let input=document.getElementById("userInput");
+let message=input.value.trim();
+
+if(message==="") return;
+
+addMessage("🧑 "+message,"user");
+
+let text=message.toLowerCase();
+
+let reply="🤖 Sorry, mujhe samajh nahi aaya. Try: Hello, Server IP, Discord, YouTube, Instagram";
+
+if(
+text.includes("hello")||
+text.includes("hi")||
+text.includes("hey")||
+text.includes("hii")
+){
+reply="🤖 Hello! Welcome to ITS LEGEND Website.";
+}
+
+else if(
+text.includes("server")||
+text.includes("ip")
+){
+reply="🎮 OnlyLegendsMC.aternos.me:63710";
+}
+
+else if(
+text.includes("discord")
+){
+reply="💬 https://discord.gg/VKhy3f8juK";
+}
+
+else if(
+text.includes("youtube")||
+text.includes("yt")
+){
+reply="▶️ https://youtube.com/@itslegenddddd";
+}
+
+else if(
+text.includes("instagram")||
+text.includes("insta")
+){
+reply="📸 https://www.instagram.com/itslegendddd";
+}
+
+addMessage(reply,"bot");
+
+input.value="";
+
+saveChat();
+
+}
+
+function addMessage(text,type){
+
+let chat=document.getElementById("chatMessages");
+
+let div=document.createElement("div");
+
+div.className=type;
+div.textContent=text;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+function saveChat(){
+
+localStorage.setItem(
+"legendChat",
+document.getElementById("chatMessages").innerHTML
+);
+
+}
+
+function loadChat(){
+
+let saved=localStorage.getItem("legendChat");
+
+if(saved){
+document.getElementById("chatMessages").innerHTML=saved;
+}else{
+document.getElementById("chatMessages").innerHTML=
+'<div class="bot">🤖 Hello! Welcome to ITS LEGEND Website.</div>';
+}
+
+}
+
+function clearChat(){
+
+localStorage.removeItem("legendChat");
+
+document.getElementById("chatMessages").innerHTML=
+'<div class="bot">🤖 Chat Cleared.</div>';
+
+}
+
+document.getElementById("userInput")
+.addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+sendMessage();
+}
+
+});
+
+loadChat();
+
+</script>
+
+</body>
+</html>
